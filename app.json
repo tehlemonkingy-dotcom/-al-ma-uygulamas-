@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "LGS Asistanım - 7. Sınıf Çalışma & Zaman Planlayıcı",
+    "slug": "ders-takip",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1E1E2E"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lgs.asistanim.ipad",
+      "tabletSupportsLandscape": true,
+      "tabletSupportsPortrait": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "remote-notification"
+        ],
+        "NSLocalNotificationUsageDescription": "LGS çalışma zamanlarını ve mola bitişlerini bildirmek için yerel bildirimler gönderilir."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1E1E2E"
+      },
+      "package": "com.lgs.asistanim.ipad"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#339AF0",
+          "sounds": []
+        }
+      ]
+    ]
+  }
+}
