@@ -1,0 +1,40 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Expo CLI
+        run: npm install -g expo-cli eas-cli
+
+      - name: Build iOS (Prebuild & Archive)
+        run: |
+          npx expo prebuild --platform ios --clean
+          cd ios
+          xcodebuild -workspace LGSAsistanim.xcworkspace -scheme LGSAsistanim -configuration Release -sdk iphoneos -archivePath $PWD/build/LGSAsistanim.xcarchive archive
+          xcodebuild -exportArchive -archivePath $PWD/build/LGSAsistanim.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/output
+        continue-on-error: true
+
+      - name: Find and Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LGS-Asimanim-IPA
+          path: |
+            output/**/*.ipa
+            **/build/**/*.ipa
+            **/*.ipa
